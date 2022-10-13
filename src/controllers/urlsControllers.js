@@ -39,4 +39,21 @@ const createUrl = async (req, res) => {
     }
 };
 
-export { createUrl };
+const readUrls = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const url = (await connection.query('SELECT id, url, "shortUrl" FROM urls WHERE id=$1;', [id])).rows;
+
+        if(url.length === 0) {
+            return res.sendStatus(404);
+        }
+
+        res.status(200).send(url[0]);
+
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+};
+
+export { createUrl, readUrls };
