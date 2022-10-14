@@ -10,11 +10,11 @@ const readRanking = async (req, res) => {
                 COALESCE(SUM(urls."visitCount"), 0) AS "visitCount" 
             FROM
                 users
-            LEFT JOIN urls ON users.id = urls."userId"
+                LEFT JOIN urls ON users.id = urls."userId"
             GROUP BY
                 users.id
             ORDER BY
-                "visitCount" DESC
+                "visitCount" DESC, "linksCount" DESC
             LIMIT
                 10;
         `)).rows;
