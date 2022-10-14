@@ -1,16 +1,9 @@
 import { connection } from "../database/db.js";
 
 const readUser = async (req, res) => {
-    const { authorization } = req.headers;
-    const token = authorization?.replace("Bearer ", "");
+    const session = res.locals.session;
 
     try {
-        const session = (await connection.query('SELECT * FROM sessions WHERE token=$1;', [token])).rows;        
-
-        if(session.length === 0) {
-            return res.sendStatus(401);
-        }
-
         const user = await connection.query(`
             SELECT
                 users.id,
