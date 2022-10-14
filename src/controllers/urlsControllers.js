@@ -39,7 +39,7 @@ const createUrl = async (req, res) => {
     }
 };
 
-const readUrls = async (req, res) => {
+const readUrl = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -56,4 +56,23 @@ const readUrls = async (req, res) => {
     }
 };
 
-export { createUrl, readUrls };
+const readShortUrl = async (req, res) => {
+    const { shortUrl } = req.params;
+
+    try {
+        const url = (await connection.query('SELECT * FROM urls WHERE "shortUrl"=$1;', [shortUrl])).rows;
+
+        if(url.length === 0) {
+            return res.sendStatus(404);
+        }
+
+        await connection.query('UPDATE urls SET "visitCount"=$1 WHERE "shortUrl"=$2;', [url[0].visitCount + 1, shortUrl]);
+
+        res.redirect(url[0].url);
+
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
+export { createUrl, readUrl, readShortUrl };
