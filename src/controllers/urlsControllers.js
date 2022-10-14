@@ -73,6 +73,33 @@ const readShortUrl = async (req, res) => {
     } catch (error) {
         return res.status(500).send(error.message);
     }
-}
+};
 
-export { createUrl, readUrl, readShortUrl };
+const deleteUrl = async (req, res) => {
+    const { id } = req.params;
+    const { authorization } = req.headers;
+    const token = authorization?.replace("Bearer ", "");
+
+    try {
+        const session = (await connection.query('SELECT * FROM sessions WHERE token=$1;', [token])).rows;        
+
+        const url = (await connection.query('SELECT * FROM urls WHERE id=$1;', [id])).rows;
+
+        if(url.length === 0) {
+            return res.sendStatus(404);
+        }
+
+        if(session.length === 0 || session[0].userId !== url[0].userId) {
+            return res.sendStatus(401);
+         }        
+
+        await connection.query('DELETE FROM urls WHERE id=$1;', [id]);
+
+        res.sendStatus(204);
+
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+export { createUrl, readUrl, readShortUrl, deleteUrl };
