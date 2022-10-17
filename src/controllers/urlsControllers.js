@@ -1,4 +1,4 @@
-import { connection } from "../database/db.js";
+import { insertUrl, listUrl, listShortUrl, updateCountUrl, listUrlId, deleteUrlId } from "../repositories/urlsRepository.js";
 import { nanoid } from "nanoid";
 
 const createUrl = async (req, res) => {
@@ -9,7 +9,7 @@ const createUrl = async (req, res) => {
         new URL(url);
         const shortUrl = nanoid();
 
-        await connection.query('INSERT INTO urls ("userId", url, "shortUrl") VALUES ($1, $2, $3);', [session[0].userId, url, shortUrl]);
+        await insertUrl(session, url, shortUrl);
 
         res.status(201).send({ shortUrl });
 
@@ -22,7 +22,7 @@ const readUrl = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const url = (await connection.query('SELECT id, url, "shortUrl" FROM urls WHERE id=$1;', [id])).rows;
+        const url = await listUrl(id);
 
         if(url.length === 0) {
             return res.sendStatus(404);
@@ -39,13 +39,13 @@ const readShortUrl = async (req, res) => {
     const { shortUrl } = req.params;
 
     try {
-        const url = (await connection.query('SELECT * FROM urls WHERE "shortUrl"=$1;', [shortUrl])).rows;
+        const url = await listShortUrl(shortUrl);
 
         if(url.length === 0) {
             return res.sendStatus(404);
         }
 
-        await connection.query('UPDATE urls SET "visitCount"=$1 WHERE "shortUrl"=$2;', [url[0].visitCount + 1, shortUrl]);
+        await updateCountUrl(url, shortUrl);
 
         res.redirect(url[0].url);
 
@@ -59,7 +59,7 @@ const deleteUrl = async (req, res) => {
     const session = res.locals.session;
 
     try {
-        const url = (await connection.query('SELECT * FROM urls WHERE id=$1;', [id])).rows;
+        const url = await listUrlId(id);
 
         if(url.length === 0) {
             return res.sendStatus(404);
@@ -69,7 +69,7 @@ const deleteUrl = async (req, res) => {
             return res.sendStatus(401);
          }        
 
-        await connection.query('DELETE FROM urls WHERE id=$1;', [id]);
+        await deleteUrlId(id);
 
         res.sendStatus(204);
 

@@ -149,21 +149,21 @@ INSERT INTO public.sessions VALUES (25, 5, 'e856e4ef-480f-4ed0-85cf-331b504f6d0d
 INSERT INTO public.sessions VALUES (36, 3, '24b2228f-98ec-400a-b0e0-f7ed3af8b0d3', '2022-10-14 03:06:02.284573-03');
 INSERT INTO public.sessions VALUES (40, 1, 'a48648ec-8aba-4c27-bf40-6fdbf0013be9', '2022-10-14 03:19:49.377619-03');
 INSERT INTO public.sessions VALUES (41, 6, 'd5216d52-21f5-4be2-b2d9-d9a4173b1366', '2022-10-14 03:20:03.497674-03');
-INSERT INTO public.sessions VALUES (42, 2, '97dbd6cf-1779-429e-98d3-e5cded853320', '2022-10-14 03:49:52.223003-03');
+INSERT INTO public.sessions VALUES (45, 2, 'bf534c35-248b-4fe5-80fe-c3280a3517a1', '2022-10-16 21:49:17.203157-03');
 
 
 --
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.urls VALUES (1, 2, 'https://www.facebook.com/', 'EPDfQ7YulntSE3TuyjFw9', 1, '2022-10-13 19:41:39.782802-03');
 INSERT INTO public.urls VALUES (3, 2, 'https://twitter.com/home?lang=pt', 'BABbgY0TeW3Jbx-WLd4ua', 2, '2022-10-13 19:42:31.679885-03');
 INSERT INTO public.urls VALUES (4, 2, 'https://www.youtube.com/', '6gE2h0_YvovNVb-rB1PJ9', 3, '2022-10-13 19:43:43.505199-03');
 INSERT INTO public.urls VALUES (6, 1, 'https://br.pinterest.com/', '3kOFparzSfe5pU3n9CaNx', 7, '2022-10-13 19:48:01.157774-03');
-INSERT INTO public.urls VALUES (2, 2, 'https://www.google.com/', 'wkjwTyS2oi_d9ALAAhjMc', 2, '2022-10-13 19:42:01.576053-03');
 INSERT INTO public.urls VALUES (8, 1, 'https://www.driven.com.br/', 'M9aF2c6IG6bTbtZBt4UO6', 0, '2022-10-13 22:25:56.18095-03');
 INSERT INTO public.urls VALUES (9, 3, 'https://www.netflix.com/br/', 'aMKEetfubGpUUwCMXv62B', 0, '2022-10-14 01:49:46.080713-03');
 INSERT INTO public.urls VALUES (12, 6, 'https://www.apple.com/br/', 'eXB7iBfDCdeVPNJtURg2l', 0, '2022-10-14 03:37:42.414139-03');
+INSERT INTO public.urls VALUES (1, 2, 'https://www.facebook.com/', 'EPDfQ7YulntSE3TuyjFw9', 3, '2022-10-13 19:41:39.782802-03');
+INSERT INTO public.urls VALUES (2, 2, 'https://www.google.com/', 'wkjwTyS2oi_d9ALAAhjMc', 9, '2022-10-13 19:42:01.576053-03');
 
 
 --
@@ -176,27 +176,29 @@ INSERT INTO public.users VALUES (3, 'eu', 'eu@eu.com', '$2b$10$UocYXkKCs7y5e/UhX
 INSERT INTO public.users VALUES (4, 'João', 'joao@joao.com', '$2b$10$0JbkjfIxr1RnzQTT0JzwKeGtrhbodwDd2UDTSghurEftkNcFmfdqS', '2022-10-14 01:52:28.786735-03');
 INSERT INTO public.users VALUES (5, 'let', 'let@let.com', '$2b$10$DhgTmVsc3PFNu2uKnS40HOppxD5puWfmsbgfrFngqMPWmhqysN96m', '2022-10-14 02:08:00.68487-03');
 INSERT INTO public.users VALUES (6, 'tico', 'tico@tico.com', '$2b$10$hewssPwrhJuE17/uyXtTo.xf5XBtHdI9Rx9ZfsO2x6C2enq1KZ/Iy', '2022-10-14 03:08:07.140295-03');
+INSERT INTO public.users VALUES (7, 'teste', 'teste@teste.com', '$2b$10$RmeaorF/vWdG4avxPit6jerLSy/PDM3sM5AQZH6xcnZPnwVPUkUwC', '2022-10-16 20:58:10.93771-03');
+INSERT INTO public.users VALUES (8, 'teste2', 'teste2@teste.com', '$2b$10$Xw12aZ6LRpVhpO804JPxaeUaA2bF1NuwjvCFhEKXXhlYHET2aTjpe', '2022-10-16 21:12:36.958183-03');
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 42, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 45, true);
 
 
 --
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 12, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 13, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 6, true);
+SELECT pg_catalog.setval('public.users_id_seq', 8, true);
 
 
 --

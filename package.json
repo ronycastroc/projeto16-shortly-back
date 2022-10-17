@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config src/app.js"
+    "start": "nodemon -r dotenv/config src/app.js"
   },
   "keywords": [],
   "author": "Rony Castro",

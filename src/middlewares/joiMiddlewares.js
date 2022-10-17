@@ -16,7 +16,7 @@ const urlSchema = joi.object({
     url: joi.string().required()
 });
 
-async function validateSignUp(req, res, next) {
+const validateSignUp = async (req, res, next) => {
     const { name, email, password, confirmPassword } = req.body;
 
     const validation = signUpSchema.validate(req. body, { abortEarly: false });
@@ -35,7 +35,7 @@ async function validateSignUp(req, res, next) {
     next();
 };
 
-async function validateSignin(req, res, next) {
+const validateSignin = async (req, res, next) => {
     const { email, password } = req.body;
 
     const validation = signInSchema.validate(req.body, { abortEarly: false });
@@ -50,7 +50,7 @@ async function validateSignin(req, res, next) {
     next();
 };
 
-async function validateUrl(req, res, next) {
+const validateUrl = async (req, res, next) => {
     const { url } = req.body;
 
     const validation = urlSchema.validate(req.body, { abortEarly: false });

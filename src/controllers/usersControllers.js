@@ -1,34 +1,12 @@
-import { connection } from "../database/db.js";
+import { listUser, listUrlsUser } from "../repositories/usersRepository.js";
 
 const readUser = async (req, res) => {
     const session = res.locals.session;
 
     try {
-        const user = await connection.query(`
-            SELECT
-                users.id,
-                users.name,
-                SUM("visitCount") AS "visitCount"
-            FROM
-                users
-            JOIN urls ON users.id = urls."userId"
-            WHERE
-                users.id=$1
-            GROUP BY
-                users.id;
-        `, [session[0].userId]);
+        const user = await listUser(session);
 
-        const urlsUser = await connection.query(`
-            SELECT
-                id,
-                url,
-                "shortUrl",
-                "visitCount"
-            FROM
-                urls
-            WHERE
-                "userId"=$1;
-        `, [session[0].userId]);
+        const urlsUser = await listUrlsUser(session);
 
         const objUrlsUser = urlsUser?.rows.map(value => ({
                 id: value.id,

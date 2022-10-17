@@ -1,6 +1,6 @@
 import { connection } from "../database/db.js";
 
-async function authValidation(req, res, next) {
+const authValidation = async (req, res, next) => {
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearer ", "");
 
